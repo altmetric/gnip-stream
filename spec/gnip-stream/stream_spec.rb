@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 require 'gnip-stream/stream'
 
 describe GnipStream::Stream do

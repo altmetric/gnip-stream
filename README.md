@@ -1,45 +1,50 @@
 # gnip-stream
 [![Build Status](https://secure.travis-ci.org/altmetric/gnip-stream.png)](http://travis-ci.org/altmetric/gnip-stream)
+[![Code Climate](https://codeclimate.com/github/altmetric/gnip-stream/badges/gpa.svg)](https://codeclimate.com/github/altmetric/gnip-stream)
 
-gnip-stream is a ruby library to connect and stream data from [GNIP](http://gnip.com/).
-It utilizes EventMachine and threads under the hood to provide a true streaming
-experience without you having to worry about writing non blocking code.
+gnip-stream is a ruby library to connect and stream data from [GNIP](http://gnip.com/). It utilizes EventMachine and threads under the hood to provide a true streaming experience without you having to worry about writing non blocking code.
 
-##Installation
+## Installation
 
 Installing gnip-stream is easy. Simply add the following line to your
 ```Gemfile```:
 
 ```ruby
-gem 'gnip-stream', :git => "https://github.com/atmetric/gnip-stream"
+gem 'gnip-stream', git: 'https://github.com/atmetric/gnip-stream'
 ```
 
-##Simple Usage
+## Simple Usage
 
 ```ruby
 require 'gnip-stream'
 
-#To connect to the special twitter powertrack api
-twitter_stream = GnipStream::PowertrackClient.new("http://yourstreamingurl.gnip.com", "someuser", "password")
+# To connect to the special twitter powertrack api
+twitter_stream = GnipStream::PowertrackClient.new('http://yourstreamingurl.gnip.com', 'someuser', 'password')
 twitter_stream.consume do |message|
   #process the message however you want
   puts message
 end
 
 #To Connect to the Facebook API
-facebook_stream = GnipStream::FacebookClient.new("http://yourstreamingurl.gnip.com", "someuser", "password")
+facebook_stream = GnipStream::FacebookClient.new('http://yourstreamingurl.gnip.com', 'someuser', 'password')
 facebook_stream.consume do |message|
   puts message
 end
 ```
 
-##Contributors
+## Contributors
+
+To this fork:
+
+* [Altmetric](https://github.com/altmetric)
+
+To the [original fork](https://github.com/rweald/gnip-stream):
 
 * [Ryan Weald](https://github.com/rweald)
 * [Sharethrough Team](https://github.com/sharethrough)
 * [Eric Wendelin](http://eriwen.com)
 
-##License
-MIT. See [LICENSE](https://github.com/rweald/gnip-stream/blob/master/LICENSE) file for more details.
+## License
+MIT. See [LICENSE](./LICENSE) file for more details.
 
 Special thanks to [Sharethrough](http://www.sharethrough.com/)

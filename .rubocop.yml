@@ -1,24 +1,11 @@
 AllCops:
   RunRailsCops: true
   Exclude:
-    - bin/*
     - Guardfile
-    - vendor/**/*
-    - lib/tasks/**/*
-    - chef/**/*
-Metrics/AbcSize:
-  Exclude:
-    - app/models/tweet_decorator.rb
-    - app/models/tweeter_decorator.rb
 Metrics/LineLength:
   Max: 120
-  Exclude:
-    - app/models/gnip_client.rb
 Metrics/MethodLength:
-  Max: 12
-  Exclude:
-    - app/models/tweet_decorator.rb
-    - app/models/tweeter_decorator.rb
+  Max: 14
 Rails/TimeZone:
   Enabled: false # it's a good idea, but currently broken
 Style/BlockDelimiters:
@@ -37,4 +24,3 @@ Style/Documentation:
 Style/FileName:
   Exclude:
     - lib/gnip-stream.rb
-
