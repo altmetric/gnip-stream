@@ -9,7 +9,7 @@ module GnipStream
     def attempt_to_reconnect(error_message)
       @error_message = error_message
       if @reconnect_attempts < 5
-        @reconnect_attempts +=1
+        @reconnect_attempts += 1
         sleep(2)
         @source_class.send(@method_name)
       else
@@ -18,8 +18,7 @@ module GnipStream
     end
 
     def reconnect_failed_raise_error
-      raise @error_message
+      fail @error_message
     end
-
   end
 end

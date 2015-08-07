@@ -1,7 +1,6 @@
 module GnipStream
-
   module StreamDelegate
-    #Magic Method that will delegate all 
+    # Magic Method that will delegate all
     # method calls to underlying stream if possible
     def method_missing(m, *args, &block)
       if @stream.respond_to?(m)
@@ -11,5 +10,4 @@ module GnipStream
       end
     end
   end
-
 end

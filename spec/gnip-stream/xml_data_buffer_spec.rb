@@ -3,24 +3,24 @@ require 'gnip-stream/xml_data_buffer'
 
 describe GnipStream::XmlDataBuffer do
   subject { GnipStream::XmlDataBuffer.new(/(test)(.*)/) }
-  describe "#initialize" do
-    it "accepts a regex pattern that will be used to match complete entries" do
+  describe '#initialize' do
+    it 'accepts a regex pattern that will be used to match complete entries' do
       pattern = Regexp.new(/hello/)
-      GnipStream::XmlDataBuffer.new(pattern).pattern.should == pattern
+      expect(GnipStream::XmlDataBuffer.new(pattern).pattern).to eq(pattern)
     end
   end
 
-  describe "#process" do
-    it "appends the data to the buffer" do
-      subject.process("hello")
-      subject.instance_variable_get(:@buffer).should == "hello"
+  describe '#process' do
+    it 'appends the data to the buffer' do
+      subject.process('hello')
+      expect(subject.instance_variable_get(:@buffer)).to eq('hello')
     end
   end
 
-  describe "#complete_entries" do
-    it "returns a list of complete entries" do
-      subject.process("test")
-      subject.complete_entries.should == ["test"]
+  describe '#complete_entries' do
+    it 'returns a list of complete entries' do
+      subject.process('test')
+      expect(subject.complete_entries).to eq(['test'])
     end
   end
 end

@@ -1,9 +1,9 @@
 module GnipStream
-  class XmlDataBuffer 
+  class XmlDataBuffer
     attr_accessor :pattern
     def initialize(pattern)
       @pattern = pattern
-      @buffer = ""
+      @buffer = ''
     end
 
     def process(chunk)

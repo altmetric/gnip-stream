@@ -1,10 +1,10 @@
 module GnipStream
-  class JsonDataBuffer 
+  class JsonDataBuffer
     attr_accessor :split_pattern, :check_pattern
     def initialize(split_pattern, check_pattern)
       @split_pattern = split_pattern
       @check_pattern = check_pattern
-      @buffer = ""
+      @buffer = ''
     end
 
     def process(chunk)

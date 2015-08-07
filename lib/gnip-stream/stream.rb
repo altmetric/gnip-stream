@@ -3,12 +3,11 @@ require 'em-http-request'
 
 module GnipStream
   class Stream
-    
     EventMachine.threadpool_size = 3
 
     attr_accessor :headers, :options, :url, :username, :password
 
-    def initialize(url, processor, headers={})
+    def initialize(url, processor, headers = {})
       @url = url
       @headers = headers
       @processor = processor
@@ -28,13 +27,13 @@ module GnipStream
 
     def connect
       EM.run do
-        http = EM::HttpRequest.new(@url, :inactivity_timeout => 45, :connection_timeout => 75).get(:head => @headers)
-        http.stream { |chunk| process_chunk(chunk) }
-        http.callback { 
-          handle_connection_close(http) 
+        http = EM::HttpRequest.new(@url, inactivity_timeout: 45, connection_timeout: 75).get(head: @headers)
+        http.stream do |chunk| process_chunk(chunk) end
+        http.callback do
+          handle_connection_close(http)
           EM.stop
-        }
-        http.errback { 
+        end
+        http.errback {
           handle_error(http)
           EM.stop
         }
@@ -43,7 +42,7 @@ module GnipStream
 
     def process_chunk(chunk)
       @processor.process(chunk)
-      @processor.complete_entries.each do |entry| 
+      @processor.complete_entries.each do |entry|
         EM.defer { @on_message.call(entry) }
       end
     end
@@ -55,6 +54,5 @@ module GnipStream
     def handle_connection_close(http_connection)
       @on_connection_close.call(http_connection)
     end
-
   end
 end

@@ -1,4 +1,4 @@
-require "gnip-stream/version"
+require 'gnip-stream/version'
 
 require 'gnip-stream/stream'
 require 'gnip-stream/json_stream'

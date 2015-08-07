@@ -3,30 +3,30 @@ require 'gnip-stream/json_stream'
 require 'gnip-stream/json_data_buffer'
 
 describe GnipStream::JsonStream do
-  subject { GnipStream::JsonStream.new("http://example.com") }
+  subject { GnipStream::JsonStream.new('http://example.com') }
 
-  describe "#initialize" do
-    it "creates underlying stream object with a json specific data buffer" do
-      GnipStream::Stream.should_receive(:new) do |url, processor, headers|
-        url.should == "http://example.com"
+  describe '#initialize' do
+    it 'creates underlying stream object with a json specific data buffer' do
+      expect(GnipStream::Stream).to receive(:new) do |url, _processor, _headers|
+        expect(url).to eq('http://example.com')
       end
-      GnipStream::JsonStream.new("http://example.com")
+      GnipStream::JsonStream.new('http://example.com')
     end
   end
 
-  describe "#method_missing" do
-    let(:underlying_stream) { double("GnipStream::Stream") }
+  describe '#method_missing' do
+    let(:underlying_stream) { double('GnipStream::Stream') }
     before do
-      GnipStream::Stream.stub(:new => underlying_stream)
+      allow(GnipStream::Stream).to receive(:new).and_return(underlying_stream)
     end
 
-    it "delegates all available methods to the underlying stream class" do
-      underlying_stream.should_receive(:connect)
+    it 'delegates all available methods to the underlying stream class' do
+      expect(underlying_stream).to receive(:connect)
       subject.connect
     end
 
-    it "raises a method not found error on self if underlying stream can not respond to the method" do
-      lambda { subject.foobar }.should raise_error(NoMethodError)
+    it 'raises a method not found error on self if underlying stream can not respond to the method' do
+      expect { subject.foobar }.to raise_error(NoMethodError)
     end
   end
 end
