@@ -1,8 +1,10 @@
 require 'spec_helper'
 require 'gnip-stream/xml_stream'
+require 'gnip-stream/xml_data_buffer'
+require 'gnip-stream/stream'
 
 describe GnipStream::XmlStream do
-  subject { GnipStream::XmlStream.new('http://example.com') }
+  let(:stream) { GnipStream::XmlStream.new('http://example.com') }
   describe '#initialize' do
     it 'creates underlying stream object with a json specific data buffer' do
       expect(GnipStream::Stream).to receive(:new) do |url, _processor, _headers|
@@ -20,11 +22,11 @@ describe GnipStream::XmlStream do
 
     it 'delegates all available methods to the underlying stream class' do
       expect(underlying_stream).to receive(:connect)
-      subject.connect
+      stream.connect
     end
 
     it 'raises a method not found error on self if underlying stream can not respond to the method' do
-      expect { subject.foobar }.to raise_error(NoMethodError)
+      expect { stream.foobar }.to raise_error(NoMethodError)
     end
   end
 end

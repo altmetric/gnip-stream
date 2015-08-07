@@ -19,7 +19,9 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = %w(lib vendor)
 
-  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rspec', '~> 3.3'
+  s.add_development_dependency 'guard'
+  s.add_development_dependency 'guard-rspec'
 
   s.add_dependency 'em-http-request', '>= 1.0.3'
 end

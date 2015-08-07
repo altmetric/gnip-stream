@@ -1,9 +1,10 @@
 require 'spec_helper'
 require 'gnip-stream/json_stream'
 require 'gnip-stream/json_data_buffer'
+require 'gnip-stream/stream'
 
 describe GnipStream::JsonStream do
-  subject { GnipStream::JsonStream.new('http://example.com') }
+  let(:stream) { GnipStream::JsonStream.new('http://example.com') }
 
   describe '#initialize' do
     it 'creates underlying stream object with a json specific data buffer' do
@@ -22,11 +23,11 @@ describe GnipStream::JsonStream do
 
     it 'delegates all available methods to the underlying stream class' do
       expect(underlying_stream).to receive(:connect)
-      subject.connect
+      stream.connect
     end
 
     it 'raises a method not found error on self if underlying stream can not respond to the method' do
-      expect { subject.foobar }.to raise_error(NoMethodError)
+      expect { stream.foobar }.to raise_error(NoMethodError)
     end
   end
 end
