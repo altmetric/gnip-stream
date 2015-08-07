@@ -8,8 +8,9 @@ describe GnipStream::JsonStream do
 
   describe '#initialize' do
     it 'creates underlying stream object with a json specific data buffer' do
-      expect(GnipStream::Stream).to receive(:new) do |url, _processor, _headers|
+      expect(GnipStream::Stream).to receive(:new) do |url, processor, _headers|
         expect(url).to eq('http://example.com')
+        expect(processor).to be_a(GnipStream::JsonDataBuffer)
       end
       GnipStream::JsonStream.new('http://example.com')
     end

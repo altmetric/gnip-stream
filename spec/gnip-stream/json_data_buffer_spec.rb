@@ -6,7 +6,7 @@ describe GnipStream::JsonDataBuffer do
   describe '#initialize' do
     it 'accepts a regex pattern that will be used to match complete entries' do
       split_pattern = "\n"
-      check_pattern = Regexp.new(/hello/)
+      check_pattern = /hello\r\n/
       expect(GnipStream::JsonDataBuffer.new(split_pattern, check_pattern).check_pattern).to eq(check_pattern)
       expect(GnipStream::JsonDataBuffer.new(split_pattern, check_pattern).split_pattern).to eq(split_pattern)
     end

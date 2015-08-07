@@ -6,8 +6,8 @@ module GnipStream
     EventMachine.threadpool_size = 3
 
     attr_accessor :headers, :options, :url, :username, :password
-    attr_reader :processor, :on_message, :on_connection_close, :on_error
-    private :processor, :on_message, :on_connection_close, :on_error
+    attr_reader :processor
+    private :processor
 
     def initialize(url, processor, headers = {})
       @url = url
@@ -50,18 +50,16 @@ module GnipStream
     def process_chunk(chunk)
       processor.process(chunk)
       processor.complete_entries.each do |entry|
-        EM.defer do
-          on_message.call(entry)
-        end
+        EM.defer { @on_message.call(entry) }
       end
     end
 
     def handle_error(http_connection)
-      on_error.call(http_connection)
+      @on_error.call(http_connection)
     end
 
     def handle_connection_close(http_connection)
-      on_connection_close.call(http_connection)
+      @on_connection_close.call(http_connection)
     end
   end
 end

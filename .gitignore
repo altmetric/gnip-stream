@@ -1,6 +1,8 @@
 *.gem
 .bundle
+.env
+.idea
+coverage/*
 Gemfile.lock
 pkg/*
 tags
-.idea

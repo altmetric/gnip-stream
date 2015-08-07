@@ -1,13 +1,14 @@
 # gnip-stream
 [![Build Status](https://secure.travis-ci.org/altmetric/gnip-stream.png)](http://travis-ci.org/altmetric/gnip-stream)
 [![Code Climate](https://codeclimate.com/github/altmetric/gnip-stream/badges/gpa.svg)](https://codeclimate.com/github/altmetric/gnip-stream)
+[![Test Coverage](https://codeclimate.com/github/altmetric/gnip-stream/badges/coverage.svg)](https://codeclimate.com/github/altmetric/gnip-stream/coverage)
 
 gnip-stream is a ruby library to connect and stream data from [GNIP](http://gnip.com/). It utilizes EventMachine and threads under the hood to provide a true streaming experience without you having to worry about writing non blocking code.
 
 ## Installation
 
 Installing gnip-stream is easy. Simply add the following line to your
-```Gemfile```:
+`Gemfile`:
 
 ```ruby
 gem 'gnip-stream', git: 'https://github.com/atmetric/gnip-stream'
