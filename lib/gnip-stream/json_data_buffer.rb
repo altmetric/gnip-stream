@@ -1,6 +1,6 @@
 module GnipStream
   class JsonDataBuffer
-    JSON_BRACE_MATCHING = /(?<match>\{(?:\g<match>|[^{}]++)*\})(?<excess>.*\Z)/m
+    JSON_BRACE_MATCHING = /\A\s*(?<match>\{(?:\g<match>|[^{}]++)*\})(?<excess>.*\z)/m
     attr_accessor :buffer
 
     def initialize
