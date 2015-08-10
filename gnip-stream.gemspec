@@ -5,14 +5,12 @@ require 'gnip-stream/version'
 Gem::Specification.new do |s|
   s.name        = 'gnip-stream'
   s.version     = GnipStream::VERSION
-  s.authors     = ['Ryan Weald']
-  s.email       = ['ryan@weald.com']
-  s.homepage    = 'https://github.com/rweald/gnip-stream'
+  s.authors     = ['Altmetric']
+  s.email       = ['support@altmetric.com']
+  s.homepage    = 'https://github.com/altmetric/gnip-stream'
   s.summary     = 'A library to connect and stream data from the GNIP streaming API'
-  s.description = ''
+  s.description = 'Based on a fork of https://github.com/rweald/gnip-stream'
   s.license = 'MIT'
-
-  s.rubyforge_project = 'gnip-stream'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
