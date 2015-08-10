@@ -1,9 +1,9 @@
 module GnipStream
   class JsonDataBuffer
-    attr_accessor :split_pattern, :check_pattern
-    def initialize(split_pattern, check_pattern)
-      @split_pattern = split_pattern
-      @check_pattern = check_pattern
+    JSON_BRACE_MATCHING = /(?<match>\{(?:\g<match>|[^{}]++)*\})(?<excess>.*\Z)/m
+    attr_accessor :buffer
+
+    def initialize
       @buffer = ''
     end
 
@@ -13,10 +13,9 @@ module GnipStream
 
     def complete_entries
       entries = []
-      while @buffer =~ check_pattern
-        activities = @buffer.split(split_pattern)
-        entries << activities.shift
-        @buffer = activities.join(split_pattern)
+      while (look_for_json = @buffer.match(JSON_BRACE_MATCHING))
+        entries << look_for_json[:match]
+        @buffer = look_for_json[:excess]
       end
 
       entries
