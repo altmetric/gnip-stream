@@ -11,7 +11,7 @@ Installing gnip-stream is easy. Simply add the following line to your
 `Gemfile`:
 
 ```ruby
-gem 'gnip-stream', git: 'https://github.com/atmetric/gnip-stream'
+gem 'gnip-stream', git: 'https://github.com/altmetric/gnip-stream'
 ```
 
 ## Simple Usage
