@@ -53,4 +53,48 @@ describe GnipStream::JsonDataBuffer do
       expect(outputs.size).to eq(1)
     end
   end
+
+  context 'when a JSON packet includes unmatched braces in text' do
+    context 'and that umatched brace is an opening brace' do
+      it 'includes all JSON objects in its output' do
+        json_stream = '{"text": "Body with a { in it"}{"text": "Body with no braces"}'
+        json_buffer = described_class.new
+
+        json_buffer.process(json_stream)
+
+        expect(json_buffer.complete_entries).to contain_exactly(
+          '{"text": "Body with a { in it"}',
+          '{"text": "Body with no braces"}'
+        )
+      end
+    end
+
+    context 'and that umatched brace is a closing brace' do
+      it 'includes all JSON objects in its output' do
+        json_stream = '{"text": "Body with a } in it"}{"text": "Body with no braces"}'
+        json_buffer = described_class.new
+
+        json_buffer.process(json_stream)
+
+        expect(json_buffer.complete_entries).to contain_exactly(
+          '{"text": "Body with a } in it"}',
+          '{"text": "Body with no braces"}'
+        )
+      end
+    end
+  end
+
+  context 'when a JSON packet includes a string with an escaped quotation mark' do
+    it 'includes all JSON objects in its output' do
+      json_stream = '{"text": "Body with a \" in it"}{"text": "Body with no braces"}'
+      json_buffer = described_class.new
+
+      json_buffer.process(json_stream)
+
+      expect(json_buffer.complete_entries).to contain_exactly(
+        '{"text": "Body with a \" in it"}',
+        '{"text": "Body with no braces"}'
+      )
+    end
+  end
 end
