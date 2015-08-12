@@ -1,6 +1,7 @@
+require 'gnip-stream/json_extractor'
+
 module GnipStream
   class JsonDataBuffer
-    JSON_BRACE_MATCHING = /\A\s*(?<match>\{(?:\g<match>|[^{}]++)*\})(?<excess>.*\z)/m
     attr_accessor :buffer
 
     def initialize
@@ -12,13 +13,11 @@ module GnipStream
     end
 
     def complete_entries
-      entries = []
-      while (look_for_json = @buffer.match(JSON_BRACE_MATCHING))
-        entries << look_for_json[:match]
-        @buffer = look_for_json[:excess]
-      end
+      parser = JsonExtractor.new(@buffer)
+      parser.process
 
-      entries
+      @buffer = parser.suffix
+      parser.matches
     end
   end
 end

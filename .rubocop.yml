@@ -2,10 +2,20 @@ AllCops:
   RunRailsCops: true
   Exclude:
     - Guardfile
+Metrics/AbcSize:
+  Exclude:
+    - lib/gnip-stream/json_extractor.rb
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - lib/gnip-stream/json_extractor.rb
 Metrics/LineLength:
   Max: 120
+  Exclude:
+    - spec/**/*
 Metrics/MethodLength:
   Max: 14
+  Exclude:
+    - lib/gnip-stream/json_extractor.rb
 Rails/TimeZone:
   Enabled: false # it's a good idea, but currently broken
 Style/BlockDelimiters:
