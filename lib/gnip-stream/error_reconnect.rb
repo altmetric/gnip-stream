@@ -1,3 +1,5 @@
+require 'gnip-stream/errors'
+
 module GnipStream
   class ErrorReconnect
     def initialize(source_class, method_name)
@@ -18,7 +20,7 @@ module GnipStream
     end
 
     def reconnect_failed_raise_error
-      fail @error_message
+      fail GnipStream::ReconnectFailedError, @error_message
     end
   end
 end

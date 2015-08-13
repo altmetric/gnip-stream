@@ -1,5 +1,6 @@
 require 'gnip-stream/version'
 
+require 'gnip-stream/errors'
 require 'gnip-stream/stream'
 require 'gnip-stream/json_stream'
 require 'gnip-stream/json_extractor'

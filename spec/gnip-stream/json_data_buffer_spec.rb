@@ -10,6 +10,13 @@ describe GnipStream::JsonDataBuffer do
 
       expect(json_buffer.buffer).to eq('foobar')
     end
+
+    it 'throws an error if the buffer fills beyond capacity' do
+      json_buffer = described_class.new(maximum_size: 102)
+      10.times { json_buffer.process('1234567890') }
+
+      expect { json_buffer.process('1234567890') }.to raise_error(GnipStream::BufferFullError)
+    end
   end
 
   describe '#complete_entries' do
