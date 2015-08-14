@@ -2,7 +2,7 @@ require 'gnip-stream/errors'
 require 'gnip-stream/json_extractor'
 
 module GnipStream
-  class JsonDataBuffer
+  class DataBuffer
     attr_accessor :buffer
     attr_reader :maximum_size
     private :maximum_size

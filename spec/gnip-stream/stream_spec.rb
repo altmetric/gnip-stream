@@ -6,12 +6,12 @@ describe GnipStream::Stream do
     double('json processor', process: self,
                              complete_entries: ['hello'])
   }
-  let(:stream) { GnipStream::Stream.new('http://example.com', fake_processor) }
+  let(:stream) { described_class.new('http://example.com', processor: fake_processor) }
 
   describe '#initialize' do
     it 'allows you to define custom headers' do
       headers = { 'keep-alive' => false }
-      stream = GnipStream::Stream.new('http://example.com', fake_processor, headers)
+      stream = GnipStream::Stream.new('http://example.com', processor: fake_processor, headers: headers)
       expect(stream.headers).to eq(headers)
     end
   end

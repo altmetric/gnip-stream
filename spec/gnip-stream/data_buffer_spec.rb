@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'gnip-stream/json_data_buffer'
+require 'gnip-stream/data_buffer'
 
-describe GnipStream::JsonDataBuffer do
+describe GnipStream::DataBuffer do
   describe '#process' do
     it 'appends the data to an internal buffer' do
-      json_buffer = GnipStream::JsonDataBuffer.new
+      json_buffer = described_class.new
       json_buffer.process('foo')
       json_buffer.process('bar')
 
@@ -21,7 +21,7 @@ describe GnipStream::JsonDataBuffer do
 
   describe '#complete_entries' do
     it 'correctly parses out each message into a separate entry' do
-      json_buffer = GnipStream::JsonDataBuffer.new
+      json_buffer = described_class.new
 
       json_buffer.process('{"message": "a", "status": {"ok": true}}{"message": "b", "options": [true, false]}')
       json_buffer.process("\r\n{\"message\": \"partial\"")
@@ -30,7 +30,7 @@ describe GnipStream::JsonDataBuffer do
     end
 
     it 'does not include blank lines' do
-      json_buffer = GnipStream::JsonDataBuffer.new
+      json_buffer = described_class.new
 
       input_stream = '{"message": "a", "status": {"ok": true}}'
       input_stream += "\r\n\r\n"
@@ -49,7 +49,7 @@ describe GnipStream::JsonDataBuffer do
       EOJSON
       incoming_chunks = incoming_json.scan(/.{,200}/)
 
-      json_buffer = GnipStream::JsonDataBuffer.new
+      json_buffer = described_class.new
 
       outputs = []
       incoming_chunks.each do |chunk|

@@ -9,7 +9,7 @@ module GnipStream
     attr_reader :processor
     private :processor
 
-    def initialize(url, processor, headers = {})
+    def initialize(url, processor: DataBuffer.new, headers: {})
       @url = url
       @headers = headers
       @processor = processor
