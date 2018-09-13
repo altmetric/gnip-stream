@@ -7,7 +7,7 @@ module GnipStream
     attr_reader :maximum_size
     private :maximum_size
 
-    def initialize(maximum_size: 250_000)
+    def initialize(maximum_size: 350_000)
       @buffer = ''
       @maximum_size = maximum_size
     end
